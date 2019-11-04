@@ -1,80 +1,168 @@
 # Will need to do some work to take out csv definitons.
 
-#rm(dfAll)
-dfAll <- df2 <- subset(nflAllYears, select = c(Average_Age, Win))
+
+columnNames <- c(
+  'Team',
+  'Signed',
+  'Average_Age',
+  'Active',
+  'Dead',
+  'Total_Cap',
+  'Cap_Space',
+  'QB',
+  'RB',
+  'WR',
+  'TE',
+  'OL',
+  'DL',
+  'LB',
+  'DB',
+  'K_B_LS',
+  'Win',
+  'Loss',
+  'Tie'
+)
+
+nfl2018 <-  read.csv('data-2018.csv', col.names = columnNames)
 
 
+nfl2018$Average_Age <- as.numeric(nfl2018$Average_Age)
+nfl2018$Active <- convertDollarsToNumeric(nfl2018$Active)
+nfl2018$Dead <- convertDollarsToNumeric(nfl2018$Dead)
+nfl2018$Total_Cap <- convertDollarsToNumeric(nfl2018$Total_Cap)
+nfl2018$Cap_Space <- convertDollarsToNumeric(nfl2018$Cap_Space)
+nfl2018$QB <- convertDollarsToNumeric(nfl2018$QB)
+nfl2018$RB <- convertDollarsToNumeric(nfl2018$RB)
+nfl2018$WR <- convertDollarsToNumeric(nfl2018$WR)
+nfl2018$TE <- convertDollarsToNumeric(nfl2018$TE)
+nfl2018$OL <- convertDollarsToNumeric(nfl2018$OL)
+nfl2018$DL <- convertDollarsToNumeric(nfl2018$DL)
+nfl2018$LB <- convertDollarsToNumeric(nfl2018$LB)
+nfl2018$DB <- convertDollarsToNumeric(nfl2018$DB)
+nfl2018$K_B_LS <- convertDollarsToNumeric(nfl2018$K_B_LS)
+nfl2018$Year <- as.integer(2018)
+
+nfl2018$All_Positions <- nfl2018$QB +
+  nfl2018$RB +
+  nfl2018$WR +
+  nfl2018$TE +
+  nfl2018$OL +
+  nfl2018$DL +
+  nfl2018$LB +
+  nfl2018$DB +
+  nfl2018$K_B_LS
+
+nfl2017 <-  read.csv('data-2017.csv', col.names = columnNames)
 
 
-age_reg2015 <- lm(formula = Win ~ Average_Age , data = nfl2015 )
-age_reg2016 <- lm(formula = Win ~ Average_Age , data = nfl2016 )
-age_reg2017 <- lm(formula = Win ~ Average_Age , data = nfl2017 )
-age_reg2018 <- lm(formula = Win ~ Average_Age , data = nfl2018 )
-age_regAll <- lm(formula = Win ~ Average_Age , data = nflAllYears )
+nfl2017$Average_Age <- as.numeric(nfl2017$Average_Age)
+nfl2017$Active <- convertDollarsToNumeric(nfl2017$Active)
+nfl2017$Dead <- convertDollarsToNumeric(nfl2017$Dead)
+nfl2017$Total_Cap <- convertDollarsToNumeric(nfl2017$Total_Cap)
+nfl2017$Cap_Space <- convertDollarsToNumeric(nfl2017$Cap_Space)
+nfl2017$QB <- convertDollarsToNumeric(nfl2017$QB)
+nfl2017$RB <- convertDollarsToNumeric(nfl2017$RB)
+nfl2017$WR <- convertDollarsToNumeric(nfl2017$WR)
+nfl2017$TE <- convertDollarsToNumeric(nfl2017$TE)
+nfl2017$OL <- convertDollarsToNumeric(nfl2017$OL)
+nfl2017$DL <- convertDollarsToNumeric(nfl2017$DL)
+nfl2017$LB <- convertDollarsToNumeric(nfl2017$LB)
+nfl2017$DB <- convertDollarsToNumeric(nfl2017$DB)
+nfl2017$K_B_LS <- convertDollarsToNumeric(nfl2017$K_B_LS)
+nfl2017$Year <- as.integer(2017)
+
+nfl2017$All_Positions <- nfl2017$QB +
+  nfl2017$RB +
+  nfl2017$WR +
+  nfl2017$TE +
+  nfl2017$OL +
+  nfl2017$DL +
+  nfl2017$LB +
+  nfl2017$DB +
+  nfl2017$K_B_LS
+
+nfl2016 <-  read.csv('data-2016.csv', col.names = columnNames)
 
 
-age_mregAll <- lm(formula = Win ~ Average_Age , data = nflAllYears )
+nfl2016$Average_Age <- as.numeric(nfl2016$Average_Age)
+nfl2016$Active <- convertDollarsToNumeric(nfl2016$Active)
+nfl2016$Dead <- convertDollarsToNumeric(nfl2016$Dead)
+nfl2016$Total_Cap <- convertDollarsToNumeric(nfl2016$Total_Cap)
+nfl2016$Cap_Space <- convertDollarsToNumeric(nfl2016$Cap_Space)
+nfl2016$QB <- convertDollarsToNumeric(nfl2016$QB)
+nfl2016$RB <- convertDollarsToNumeric(nfl2016$RB)
+nfl2016$WR <- convertDollarsToNumeric(nfl2016$WR)
+nfl2016$TE <- convertDollarsToNumeric(nfl2016$TE)
+nfl2016$OL <- convertDollarsToNumeric(nfl2016$OL)
+nfl2016$DL <- convertDollarsToNumeric(nfl2016$DL)
+nfl2016$LB <- convertDollarsToNumeric(nfl2016$LB)
+nfl2016$DB <- convertDollarsToNumeric(nfl2016$DB)
+nfl2016$K_B_LS <- convertDollarsToNumeric(nfl2016$K_B_LS)
+nfl2016$Year <- as.integer(2016)
 
-summary(age_reg2015)
-summary(age_reg2016)
-summary(age_reg2017)
-summary(age_reg2018)
-summary(age_regAll)
+nfl2016$All_Positions <- nfl2016$QB +
+  nfl2016$RB +
+  nfl2016$WR +
+  nfl2016$TE +
+  nfl2016$OL +
+  nfl2016$DL +
+  nfl2016$LB +
+  nfl2016$DB +
+  nfl2016$K_B_LS
 
-
-
-
-
-
-ggplot() +
-  geom_point(aes(x = nflAllYears$Average_Age, y = nflAllYears$Win),
-             colour = 'orange') +
-  geom_line(aes(x = nflAllYears$Average_Age, y = predict(age_regAll, newdata = nflAllYears)),
-            colour = 'black') +
-  ggtitle('Simple Linear Regression for Age and Wins') +
-  xlab('Average Age') + 
-  ylab('Number of Wins')
-
-
-ggplot() +
-  geom_point(aes(x = nflAllYears$Average_Age, y = nflAllYears$Win),
-             colour = 'orange') +
-  geom_line(aes(x = nflAllYears$Average_Age, y = predict(age_mregAll, newdata = nflAllYears)),
-            colour = 'black') +
-  ggtitle('Simple Linear Regression for Age and Wins') +
-  xlab('Average Age') + 
-  ylab('Number of Wins')
-
-ggplot() +
-  geom_point(aes(x = nflAllYears$Total_Cap, y = nflAllYears$Win),
-             colour = 'orange') +
-  geom_line(aes(x = nflAllYears$Total_Cap, y = predict(age_mregAll, newdata = nflAllYears)),
-            colour = 'black') +
-  ggtitle('Simple Linear Regression for Age and Wins') +
-  xlab('Average Age') + 
-  ylab('Number of Wins')
+nfl2015 <-  read.csv('data-2015.csv', col.names = columnNames)
 
 
-# g2018w <- qplot(Average_Age, Win, data = nfl2018)
-# g2017w <- qplot(Average_Age, Win, data = nfl2017)
-# g2016w <- qplot(Average_Age, Win, data = nfl2016)
-# g2015w <- qplot(Average_Age, Win, data = nfl2015)
-# g2018l <- qplot(Average_Age, Loss, data = nfl2018)
-# g2017l <- qplot(Average_Age, Loss, data = nfl2017)
-# g2016l <- qplot(Average_Age, Loss, data = nfl2016)
-# g2015l <- qplot(Average_Age, Loss, data = nfl2015)
-# 
-# g2018w
-# g2018l
-# g2017w
-# g2017l
-# g2016w
-# g2016l
-# g2015w
-# g2015l
+nfl2015$Average_Age <- as.numeric(nfl2015$Average_Age)
+nfl2015$Active <- convertDollarsToNumeric(nfl2015$Active)
+nfl2015$Dead <- convertDollarsToNumeric(nfl2015$Dead)
+nfl2015$Total_Cap <- convertDollarsToNumeric(nfl2015$Total_Cap)
+nfl2015$Cap_Space <- convertDollarsToNumeric(nfl2015$Cap_Space)
+nfl2015$QB <- convertDollarsToNumeric(nfl2015$QB)
+nfl2015$RB <- convertDollarsToNumeric(nfl2015$RB)
+nfl2015$WR <- convertDollarsToNumeric(nfl2015$WR)
+nfl2015$TE <- convertDollarsToNumeric(nfl2015$TE)
+nfl2015$OL <- convertDollarsToNumeric(nfl2015$OL)
+nfl2015$DL <- convertDollarsToNumeric(nfl2015$DL)
+nfl2015$LB <- convertDollarsToNumeric(nfl2015$LB)
+nfl2015$DB <- convertDollarsToNumeric(nfl2015$DB)
+nfl2015$K_B_LS <- convertDollarsToNumeric(nfl2015$K_B_LS)
+nfl2015$Year <- as.integer(2015)
+
+nfl2015$All_Positions <- nfl2015$QB +
+  nfl2015$RB +
+  nfl2015$WR +
+  nfl2015$TE +
+  nfl2015$OL +
+  nfl2015$DL +
+  nfl2015$LB +
+  nfl2015$DB +
+  nfl2015$K_B_LS
 
 
+nflAllYears <- rbind(nfl2015,nfl2016)
+nflAllYears <- rbind(nflAllYears,nfl2017)
+nflAllYears <- rbind(nflAllYears,nfl2018)
 
+#####################################################################
+
+g2018w <- qplot(Average_Age, Win, data = nfl2018)
+g2017w <- qplot(Average_Age, Win, data = nfl2017)
+g2016w <- qplot(Average_Age, Win, data = nfl2016)
+g2015w <- qplot(Average_Age, Win, data = nfl2015)
+g2018l <- qplot(Average_Age, Loss, data = nfl2018)
+g2017l <- qplot(Average_Age, Loss, data = nfl2017)
+g2016l <- qplot(Average_Age, Loss, data = nfl2016)
+g2015l <- qplot(Average_Age, Loss, data = nfl2015)
+
+g2018w
+g2018l
+g2017w
+g2017l
+g2016w
+g2016l
+g2015w
+g2015l
 
 
 
