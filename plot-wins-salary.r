@@ -1,1 +1,0 @@
-print('plot wins and salary')
