@@ -1,0 +1,49 @@
+---
+title: "Positions"
+author: "Josh"
+date: "10/29/2019"
+output: html_document
+---
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+print('start main')
+
+#required packages
+require('rvest')
+
+#clear workspace
+rm(list = ls())
+
+#install packages if necessary
+# install.packages("rvest")
+
+#load libraries
+library(rvest)
+library(ggplot2)
+library(scales)
+library(dplyr)
+library(reshape2)
+
+#steps
+source('load-win-loss.r')
+source('plot-wins-salary.r')
+
+
+```
+
+
+
+Organizations, whether it is the NFL or the company you work for, have a defined budget of dollars they can spend on salaries for their staff. When determining how to allocate salary dollars they weigh several factors such as supply and demand of necessary talent, the organization's performance, and the individual's performance or experience. Ultimately, the organization wants to efficiently spend salary dollars by allocating more on key talent that will best improve the organization's performance.
+
+With this understanding, it makes sense that the NFL would allocate more of their salary cap to positions that result in better performance (measured by number of wins).
+
+The quarter back is usually one of the highest paid and highest profile individual players, so we also expected a correlation between the number of wins a team has and the amount of money paid to their quarterback, but this wasn't supported in the data either.
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+d <- qplot(QB, nflAllYears$Win, data=nflAllYears, geom = "point")
+d <- d + ggtitle("Number of Wins and Dollars Spent on Quarterback")
+d <- d + theme(title = element_text(size = 9))
+d <- d + scale_y_continuous(limits = c(0, NA), name = "Number of Wins in 2018")
+d <- d + scale_x_continuous(limits = c(0, NA), labels = dollar, name = "Cap Spend on Quarterback")
+print(d)
+```
+
